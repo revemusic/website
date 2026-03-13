@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RÊVE MUSIC GROUP</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Tenor+Sans&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --cream: #f0ebe2; --warm-white: #faf8f4; --gold: #c9a84c; --gold-light: #e2c97e;
+  --charcoal: #1a1814; --dark: #0e0d0b; --mid: #2e2b25; --muted: rgba(240,235,226,0.45);
+  --font-display: 'Cormorant Garamond', serif; --font-ui: 'Tenor Sans', sans-serif; --font-body: 'Montserrat', sans-serif;
+}
+html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+body { background: var(--dark); color: var(--cream); font-family: var(--font-body); cursor: none; overflow-x: hidden; }
+
+/* CURSOR */
+.cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .3s, height .3s, background .3s, border .3s; }
+.cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid rgba(201,168,76,.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .3s, height .3s; }
+.grain { position: fixed; inset: 0; z-index: 200; pointer-events: none; opacity: .035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-size: 200px; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+nav::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(14,13,11,.8) 0%, transparent 100%); pointer-events: none; }
+.nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; letter-spacing: .25em; color: var(--cream); text-decoration: none; position: relative; z-index: 1; }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; position: relative; z-index: 1; }
+.nav-links a { font-family: var(--font-ui); font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .3s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-admin-btn { position: relative; z-index: 1; font-family: var(--font-ui); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; background: transparent; border: 1px solid rgba(201,168,76,.3); color: var(--gold); padding: .6rem 1.2rem; cursor: none; transition: background .3s, border-color .3s; }
+.nav-admin-btn:hover { background: rgba(201,168,76,.08); border-color: var(--gold); }
+
+/* SECTIONS */
+section { min-height: 100vh; scroll-snap-align: start; position: relative; display: flex; align-items: center; overflow: hidden; }
+
+/* HERO VIDEO */
+#hero { background: var(--dark); justify-content: center; text-align: center; }
+.hero-video-wrap { position: absolute; inset: 0; overflow: hidden; }
+.hero-video-wrap video { width: 100%; height: 100%; object-fit: cover; opacity: .35; }
+.hero-video-wrap iframe { width: 100%; height: 100%; border: none; pointer-events: none; transform: scale(1.3); }
+.video-picker { position: absolute; bottom: 6rem; right: 2rem; z-index: 10; display: flex; flex-direction: column; gap: .5rem; }
+.video-opt { font-family: var(--font-ui); font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; background: rgba(14,13,11,.7); border: 1px solid rgba(201,168,76,.2); color: rgba(201,168,76,.6); padding: .4rem .8rem; cursor: none; transition: all .3s; text-align: left; }
+.video-opt:hover, .video-opt.active { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,.08); }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(14,13,11,.3) 0%, rgba(14,13,11,.15) 40%, rgba(14,13,11,.6) 100%); }
+.hero-content { position: relative; z-index: 2; animation: fadeUp 1.6s cubic-bezier(.16,1,.3,1) both; }
+.hero-eyebrow { font-family: var(--font-ui); font-size: .65rem; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; animation: fadeUp 1.4s .2s cubic-bezier(.16,1,.3,1) both; }
+.hero-title { font-family: var(--font-display); font-size: clamp(4.5rem,12vw,11rem); font-weight: 300; line-height: .9; letter-spacing: -.01em; color: var(--cream); margin-bottom: .15em; animation: fadeUp 1.4s .35s cubic-bezier(.16,1,.3,1) both; }
+.hero-title em { font-style: italic; color: var(--gold-light); }
+.hero-subtitle { font-family: var(--font-display); font-size: clamp(1.2rem,3vw,2rem); font-weight: 300; font-style: italic; color: var(--muted); letter-spacing: .05em; margin-bottom: 3.5rem; animation: fadeUp 1.4s .5s cubic-bezier(.16,1,.3,1) both; }
+.hero-tagline { font-family: var(--font-body); font-size: .7rem; font-weight: 300; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); animation: fadeUp 1.4s .65s cubic-bezier(.16,1,.3,1) both; }
+.scroll-cue { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .75rem; animation: fadeUp 1s 1.2s both; z-index: 2; }
+.scroll-cue span { font-family: var(--font-ui); font-size: .58rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(201,168,76,.5); }
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+
+/* ARTISTS */
+#artists { background: var(--charcoal); padding: 0; align-items: stretch; }
+.artists-inner { width: 100%; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+.artists-left { padding: 12vh 6vw 8vh; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(201,168,76,.12); }
+.section-label { font-family: var(--font-ui); font-size: .6rem; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+.section-label::before { content: ''; width: 30px; height: 1px; background: var(--gold); flex-shrink: 0; }
+.section-title { font-family: var(--font-display); font-size: clamp(2.8rem,5vw,5rem); font-weight: 300; line-height: 1.05; color: var(--cream); margin-bottom: 2rem; }
+.section-title em { font-style: italic; color: var(--gold-light); }
+.section-body { font-family: var(--font-body); font-size: .8rem; font-weight: 300; line-height: 1.9; color: rgba(240,235,226,.6); max-width: 380px; margin-bottom: 3rem; }
+.artists-right { position: relative; overflow: hidden; background: var(--mid); min-height: 60vh; }
+.artist-visual { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 80% at 60% 30%, rgba(201,168,76,.15) 0%, transparent 60%), linear-gradient(135deg, #1a1814 0%, #2e2b25 40%, #1a1210 100%); display: flex; align-items: center; justify-content: center; }
+.artist-monogram { font-family: var(--font-display); font-size: 18rem; font-weight: 300; color: rgba(201,168,76,.08); line-height: 1; font-style: italic; user-select: none; }
+.artist-card { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 4rem; background: linear-gradient(to top, rgba(14,13,11,.9) 0%, rgba(14,13,11,.2) 50%, transparent 100%); }
+.artist-name { font-family: var(--font-display); font-size: 3.5rem; font-weight: 300; letter-spacing: .05em; color: var(--cream); position: relative; z-index: 1; }
+.artist-role { font-family: var(--font-ui); font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-top: .5rem; position: relative; z-index: 1; }
+.artist-desc { font-family: var(--font-body); font-size: .72rem; font-weight: 300; color: rgba(240,235,226,.55); line-height: 1.8; margin-top: 1rem; max-width: 300px; position: relative; z-index: 1; }
+
+/* SERVICES */
+#services { background: var(--dark); padding: 12vh 8vw; display: block; scroll-snap-align: start; }
+#services .inner { display: flex; flex-direction: column; justify-content: center; min-height: 100vh; padding: 8vh 0; }
+.services-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 6rem; border-bottom: 1px solid rgba(201,168,76,.12); padding-bottom: 3rem; }
+.services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(201,168,76,.08); }
+.service-item { background: var(--dark); padding: 3.5rem 2.5rem; position: relative; overflow: hidden; transition: background .4s; }
+.service-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+.service-item:hover { background: rgba(201,168,76,.04); }
+.service-item:hover::before { transform: scaleX(1); }
+.service-num { font-family: var(--font-display); font-size: 4rem; font-weight: 300; color: rgba(201,168,76,.15); line-height: 1; margin-bottom: 1.5rem; font-style: italic; }
+.service-name { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; color: var(--cream); margin-bottom: 1rem; line-height: 1.2; }
+.service-desc { font-family: var(--font-body); font-size: .72rem; font-weight: 300; line-height: 1.9; color: rgba(240,235,226,.5); }
+
+/* ABOUT */
+#about { background: var(--mid); justify-content: center; align-items: center; }
+.about-inner { display: grid; grid-template-columns: 1fr 1.4fr; gap: 0; width: 100%; min-height: 100vh; align-items: stretch; }
+.about-left { position: relative; overflow: hidden; min-height: 50vh; }
+.about-visual { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 40% 50%, rgba(201,168,76,.12) 0%, transparent 65%), linear-gradient(160deg, #0e0d0b 0%, #2e2b25 60%, #1a1814 100%); display: flex; align-items: center; justify-content: center; }
+.about-reve-mark { font-family: var(--font-display); font-size: 22rem; font-weight: 300; color: rgba(201,168,76,.06); font-style: italic; line-height: 1; user-select: none; transform: rotate(-10deg); }
+.about-year { position: absolute; bottom: 3rem; right: 3rem; font-family: var(--font-ui); font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: rgba(201,168,76,.4); }
+.about-right { padding: 14vh 7vw; display: flex; flex-direction: column; justify-content: center; border-left: 1px solid rgba(201,168,76,.12); }
+.about-quote { font-family: var(--font-display); font-size: clamp(1.6rem,3vw,2.6rem); font-weight: 300; font-style: italic; line-height: 1.4; color: var(--cream); margin-bottom: 3rem; position: relative; padding-left: 2rem; }
+.about-quote::before { content: ''; position: absolute; left: 0; top: .3em; width: 3px; height: 2.5em; background: var(--gold); }
+.about-body { font-family: var(--font-body); font-size: .78rem; font-weight: 300; line-height: 2; color: rgba(240,235,226,.55); margin-bottom: 3rem; max-width: 480px; }
+.about-stats { display: flex; gap: 3rem; padding-top: 2.5rem; border-top: 1px solid rgba(201,168,76,.12); }
+.stat-val { font-family: var(--font-display); font-size: 2.8rem; font-weight: 300; color: var(--gold-light); font-style: italic; line-height: 1; }
+.stat-label { font-family: var(--font-ui); font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(240,235,226,.4); margin-top: .4rem; }
+
+/* CONTACT */
+#contact { background: var(--dark); justify-content: center; text-align: center; padding: 0 4vw; }
+.contact-inner { max-width: 700px; width: 100%; }
+.contact-title { font-family: var(--font-display); font-size: clamp(3.5rem,8vw,8rem); font-weight: 300; line-height: .95; color: var(--cream); margin-bottom: 2rem; }
+.contact-title em { font-style: italic; color: var(--gold-light); }
+.contact-sub { font-family: var(--font-body); font-size: .75rem; font-weight: 300; letter-spacing: .15em; color: rgba(240,235,226,.45); margin-bottom: 4rem; line-height: 1.8; }
+.contact-email { display: inline-block; font-family: var(--font-display); font-size: clamp(1.1rem,2.5vw,1.8rem); font-weight: 300; color: var(--cream); text-decoration: none; border-bottom: 1px solid rgba(201,168,76,.4); padding-bottom: .2em; transition: color .3s, border-color .3s; margin-bottom: 4rem; }
+.contact-email:hover { color: var(--gold); border-color: var(--gold); }
+.social-row { display: flex; justify-content: center; gap: 2.5rem; margin-bottom: 5rem; }
+.social-link { font-family: var(--font-ui); font-size: .6rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(240,235,226,.35); text-decoration: none; transition: color .3s; }
+.social-link:hover { color: var(--gold); }
+.footer-line { font-family: var(--font-ui); font-size: .55rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(240,235,226,.2); }
+.btn-outline { display: inline-flex; align-items: center; gap: 1rem; font-family: var(--font-ui); font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid rgba(201,168,76,.35); padding: 1.1rem 2.2rem; transition: background .3s, border-color .3s; }
+.btn-outline:hover { background: rgba(201,168,76,.08); border-color: var(--gold); }
+.btn-outline::after { content: '↗'; }
+
+/* ===================== ADMIN PANEL ===================== */
+#admin-overlay { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(10,9,8,.95); backdrop-filter: blur(12px); }
+#admin-overlay.open { display: flex; }
+.admin-panel { width: 100%; max-width: 1100px; margin: auto; display: grid; grid-template-columns: 280px 1fr; height: 90vh; border: 1px solid rgba(201,168,76,.15); background: #0e0d0b; }
+.admin-sidebar { border-right: 1px solid rgba(201,168,76,.1); padding: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.admin-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; letter-spacing: .2em; color: var(--cream); margin-bottom: 1rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(201,168,76,.1); }
+.admin-logo span { color: var(--gold); }
+.admin-subtitle { font-family: var(--font-ui); font-size: .55rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(201,168,76,.5); margin-bottom: 1.5rem; }
+.sidebar-section { font-family: var(--font-ui); font-size: .55rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(201,168,76,.35); margin: 1rem 0 .5rem; }
+.sidebar-btn { display: flex; align-items: center; gap: .75rem; font-family: var(--font-body); font-size: .72rem; font-weight: 300; color: rgba(240,235,226,.5); background: transparent; border: none; padding: .6rem .8rem; cursor: none; width: 100%; text-align: left; border-radius: 2px; transition: background .2s, color .2s; }
+.sidebar-btn:hover, .sidebar-btn.active { background: rgba(201,168,76,.07); color: var(--cream); }
+.sidebar-btn .icon { width: 16px; color: var(--gold); opacity: .5; font-size: .8rem; }
+.sidebar-btn.active .icon { opacity: 1; }
+.admin-video-opts { margin-top: auto; padding-top: 1.5rem; border-top: 1px solid rgba(201,168,76,.1); }
+.video-label { font-family: var(--font-ui); font-size: .55rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(201,168,76,.35); margin-bottom: .75rem; }
+.vopt { display: flex; align-items: center; gap: .5rem; font-family: var(--font-body); font-size: .68rem; font-weight: 300; color: rgba(240,235,226,.45); background: transparent; border: 1px solid rgba(201,168,76,.1); padding: .5rem .8rem; cursor: none; width: 100%; margin-bottom: .4rem; transition: all .2s; text-align: left; }
+.vopt:hover, .vopt.vactive { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,.05); }
+.vopt .vdot { width: 6px; height: 6px; border-radius: 50%; background: rgba(201,168,76,.3); flex-shrink: 0; }
+.vopt.vactive .vdot { background: var(--gold); }
+
+/* Admin main */
+.admin-main { display: flex; flex-direction: column; overflow: hidden; }
+.admin-topbar { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem; border-bottom: 1px solid rgba(201,168,76,.1); flex-shrink: 0; }
+.admin-section-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 300; color: var(--cream); font-style: italic; }
+.admin-close { font-family: var(--font-ui); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(201,168,76,.5); background: transparent; border: 1px solid rgba(201,168,76,.2); padding: .5rem 1rem; cursor: none; transition: all .3s; }
+.admin-close:hover { color: var(--gold); border-color: var(--gold); }
+
+/* Chat interface */
+.chat-area { flex: 1; overflow-y: auto; padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; scroll-behavior: smooth; }
+.chat-area::-webkit-scrollbar { width: 4px; }
+.chat-area::-webkit-scrollbar-track { background: transparent; }
+.chat-area::-webkit-scrollbar-thumb { background: rgba(201,168,76,.2); border-radius: 2px; }
+.msg { display: flex; gap: 1rem; max-width: 85%; }
+.msg.user { align-self: flex-end; flex-direction: row-reverse; }
+.msg-avatar { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-ui); font-size: .55rem; letter-spacing: .05em; flex-shrink: 0; }
+.msg.ai .msg-avatar { background: rgba(201,168,76,.15); border: 1px solid rgba(201,168,76,.3); color: var(--gold); }
+.msg.user .msg-avatar { background: rgba(240,235,226,.08); border: 1px solid rgba(240,235,226,.15); color: var(--cream); }
+.msg-bubble { font-family: var(--font-body); font-size: .75rem; font-weight: 300; line-height: 1.8; padding: 1rem 1.25rem; }
+.msg.ai .msg-bubble { background: rgba(201,168,76,.05); border: 1px solid rgba(201,168,76,.1); color: rgba(240,235,226,.8); border-radius: 0 8px 8px 8px; }
+.msg.user .msg-bubble { background: rgba(240,235,226,.06); border: 1px solid rgba(240,235,226,.1); color: rgba(240,235,226,.7); border-radius: 8px 0 8px 8px; text-align: right; }
+.msg-bubble strong { color: var(--gold); font-weight: 400; }
+.msg-bubble .change-tag { display: inline-block; background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.25); color: var(--gold); font-size: .62rem; padding: .15rem .5rem; margin: .1rem; border-radius: 2px; }
+.typing-indicator { display: flex; gap: .4rem; align-items: center; padding: .5rem 0; }
+.typing-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: .4; animation: typingBounce 1.2s ease-in-out infinite; }
+.typing-dot:nth-child(2) { animation-delay: .2s; }
+.typing-dot:nth-child(3) { animation-delay: .4s; }
+
+/* Chat input */
+.chat-input-row { padding: 1.5rem 2rem; border-top: 1px solid rgba(201,168,76,.1); display: flex; gap: 1rem; flex-shrink: 0; }
+.chat-input { flex: 1; background: rgba(201,168,76,.04); border: 1px solid rgba(201,168,76,.15); color: var(--cream); font-family: var(--font-body); font-size: .75rem; font-weight: 300; padding: .9rem 1.2rem; resize: none; height: 48px; line-height: 1.5; transition: border-color .3s; outline: none; cursor: text; }
+.chat-input:focus { border-color: rgba(201,168,76,.4); }
+.chat-input::placeholder { color: rgba(240,235,226,.2); }
+.chat-send { font-family: var(--font-ui); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.3); color: var(--gold); padding: 0 1.5rem; cursor: none; transition: all .3s; white-space: nowrap; }
+.chat-send:hover { background: rgba(201,168,76,.2); border-color: var(--gold); }
+
+/* Quick prompts */
+.quick-prompts { display: flex; gap: .5rem; padding: .75rem 2rem 0; flex-wrap: wrap; flex-shrink: 0; }
+.qp { font-family: var(--font-body); font-size: .65rem; font-weight: 300; background: transparent; border: 1px solid rgba(201,168,76,.15); color: rgba(201,168,76,.6); padding: .35rem .8rem; cursor: none; transition: all .25s; }
+.qp:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,.05); }
+
+/* Live preview tab */
+.preview-area { flex: 1; overflow: auto; padding: 2rem; }
+.field-group { margin-bottom: 2.5rem; }
+.field-label { font-family: var(--font-ui); font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(201,168,76,.5); margin-bottom: .6rem; }
+.field-input { width: 100%; background: rgba(201,168,76,.04); border: 1px solid rgba(201,168,76,.12); color: var(--cream); font-family: var(--font-body); font-size: .78rem; font-weight: 300; padding: .8rem 1rem; outline: none; transition: border-color .3s; cursor: text; }
+.field-input:focus { border-color: rgba(201,168,76,.4); }
+.field-textarea { resize: vertical; min-height: 80px; line-height: 1.7; }
+.apply-btn { font-family: var(--font-ui); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; background: rgba(201,168,76,.1); border: 1px solid rgba(201,168,76,.3); color: var(--gold); padding: .7rem 1.5rem; cursor: none; transition: all .3s; margin-top: 1rem; }
+.apply-btn:hover { background: rgba(201,168,76,.2); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.section-divider { font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; font-style: italic; color: var(--cream); border-bottom: 1px solid rgba(201,168,76,.1); padding-bottom: .75rem; margin-bottom: 1.5rem; }
+
+/* Toast */
+.toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(14,13,11,.95); border: 1px solid rgba(201,168,76,.3); color: var(--gold); font-family: var(--font-ui); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; padding: .8rem 1.8rem; z-index: 2000; transition: transform .4s cubic-bezier(.16,1,.3,1); pointer-events: none; }
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes scrollPulse { 0%,100% { opacity: .3; } 50% { opacity: 1; } }
+@keyframes typingBounce { 0%,60%,100% { transform: translateY(0); opacity: .4; } 30% { transform: translateY(-5px); opacity: 1; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 1.5rem 2rem; }
+  .nav-links { display: none; }
+  .artists-inner, .about-inner { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .admin-panel { grid-template-columns: 1fr; max-width: 95vw; height: 95vh; }
+  .admin-sidebar { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="toast" id="toast"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">R<span>Ê</span>VE <span style="color:var(--muted);font-size:.9em;">MUSIC</span></a>
+  <ul class="nav-links">
+    <li><a href="#artists">Artists</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-admin-btn" onclick="openAdmin()">✦ Edit Site</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-video-wrap" id="heroVideoWrap">
+    <!-- Video inserted by JS -->
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow" id="heroEyebrow">Toronto · Seoul · Global</p>
+    <h1 class="hero-title" id="heroTitle">R<em>Ê</em>VE<br>MUSIC</h1>
+    <p class="hero-subtitle" id="heroSubtitle">Where vision becomes sound</p>
+    <p class="hero-tagline" id="heroTagline">Artist Management &amp; Music Group</p>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="scroll-line"></div></div>
+
+  <div class="video-picker" id="videoPicker">
+    <div class="video-opt active" onclick="setVideo('city')">🌃 City Lights</div>
+    <div class="video-opt" onclick="setVideo('studio')">🎵 Studio</div>
+    <div class="video-opt" onclick="setVideo('abstract')">✦ Abstract</div>
+    <div class="video-opt" onclick="setVideo('seoul')">🏙 Seoul</div>
+  </div>
+</section>
+
+<!-- ARTISTS -->
+<section id="artists">
+  <div class="artists-inner">
+    <div class="artists-left">
+      <div class="section-label">Our Roster</div>
+      <h2 class="section-title">The<br><em>Artists</em></h2>
+      <p class="section-body" id="rosterBody">RÊVE MUSIC represents extraordinary artists at the intersection of culture, craft, and commerce — building careers that transcend borders and resonate across generations.</p>
+      <a href="#contact" class="btn-outline">Work With Us</a>
+    </div>
+    <div class="artists-right">
+      <div class="artist-visual"><div class="artist-monogram" id="artistMonogram">N</div></div>
+      <div class="artist-card">
+        <div class="artist-name" id="artistName">NIIVA</div>
+        <div class="artist-role" id="artistRole">Singer · Songwriter · Performer</div>
+        <p class="artist-desc" id="artistDesc">A singular voice bridging Canadian artistry with the global Korean pop landscape. Co-writer of aespa's record-breaking debut — an artist redefining cross-cultural pop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="inner" style="width:100%;">
+    <div class="services-header">
+      <div><div class="section-label">What We Do</div><h2 class="section-title" style="margin-bottom:0;">Our <em>Services</em></h2></div>
+      <p style="font-family:var(--font-body);font-size:.72rem;font-weight:300;color:rgba(240,235,226,.4);max-width:320px;line-height:1.9;text-align:right;" id="servicesIntro">Full-spectrum representation for artists who demand more — from career architecture to global deal-making.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid">
+      <div class="service-item"><div class="service-num">01</div><div class="service-name">Artist<br>Management</div><p class="service-desc">Strategic career guidance, contract negotiation, team building, and day-to-day management for recording and touring artists at every stage.</p></div>
+      <div class="service-item"><div class="service-num">02</div><div class="service-name">Label &amp;<br>Distribution</div><p class="service-desc">Distributed through The Orchard, RÊVE MUSIC GROUP delivers global music distribution, release strategy, and label services for independent artists.</p></div>
+      <div class="service-item"><div class="service-num">03</div><div class="service-name">International<br>Partnerships</div><p class="service-desc">Deep relationships with Korean entertainment companies including SM Entertainment, creating pathways for cross-cultural collaborations and market access.</p></div>
+      <div class="service-item"><div class="service-num">04</div><div class="service-name">Sync &amp;<br>Licensing</div><p class="service-desc">Connecting original music with film, television, advertising, and emerging platforms through a curated network of industry relationships.</p></div>
+      <div class="service-item"><div class="service-num">05</div><div class="service-name">A&amp;R &amp;<br>Development</div><p class="service-desc">Identifying and developing emerging talent through songwriter camps, co-writing sessions, and partnerships with SOCAN and leading publishers.</p></div>
+      <div class="service-item"><div class="service-num">06</div><div class="service-name">Brand<br>Strategy</div><p class="service-desc">Artist branding, visual identity, social strategy, and partnership development — shaping how artists are seen and heard in a saturated market.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-left">
+      <div class="about-visual"><div class="about-reve-mark">R</div></div>
+      <div class="about-year">Est. Toronto, Canada</div>
+    </div>
+    <div class="about-right">
+      <div class="section-label">Our Story</div>
+      <blockquote class="about-quote" id="aboutQuote">"Music without borders — built on relationships that last decades."</blockquote>
+      <p class="about-body" id="aboutBody1">RÊVE MUSIC GROUP was founded on a simple belief: extraordinary artists deserve extraordinary support. From Toronto to Seoul, we have spent years building genuine relationships across two of the world's most dynamic music industries.</p>
+      <p class="about-body" id="aboutBody2">Distributed through The Orchard and operating under the MIND VISION holding company, RÊVE MUSIC is built for the modern music landscape — where borders are obstacles to be dissolved, not walls to hide behind.</p>
+      <div class="about-stats">
+        <div><div class="stat-val" id="stat1Val">8+</div><div class="stat-label" id="stat1Label">Years Active</div></div>
+        <div><div class="stat-val" id="stat2Val">2</div><div class="stat-label" id="stat2Label">Continents</div></div>
+        <div><div class="stat-val" id="stat3Val">∞</div><div class="stat-label" id="stat3Label">Ambition</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="justify-content:center;margin-bottom:2rem;">Get In Touch</div>
+    <h2 class="contact-title">Let's make<br>something <em>real</em></h2>
+    <p class="contact-sub" id="contactSub">Whether you're an artist looking for representation, a label seeking collaboration, or a brand exploring music partnerships — we'd love to hear from you.</p>
+    <div style="margin-bottom:2rem;"><a href="mailto:info@revemusic.com" class="contact-email" id="contactEmail">info@revemusic.com</a></div>
+    <div class="social-row">
+      <a href="https://www.instagram.com/itommylam/" target="_blank" class="social-link">Instagram</a>
+      <a href="https://www.facebook.com/revemusicgroup" target="_blank" class="social-link">Facebook</a>
+      <a href="https://www.linkedin.com/company/revemusic/" target="_blank" class="social-link">LinkedIn</a>
+    </div>
+    <div class="footer-line" id="footerLine">© 2026 RÊVE MUSIC GROUP · MIND VISION LLC · All rights reserved</div>
+  </div>
+</section>
+
+<!-- =================== ADMIN OVERLAY =================== -->
+<div id="admin-overlay">
+  <div class="admin-panel">
+    <!-- Sidebar -->
+    <div class="admin-sidebar">
+      <div class="admin-logo">R<span>Ê</span>VE <span style="color:var(--muted)">CMS</span></div>
+      <div class="admin-subtitle">AI Site Editor</div>
+      <div class="sidebar-section">Sections</div>
+      <button class="sidebar-btn active" onclick="switchTab('chat')" id="tab-chat"><span class="icon">✦</span> AI Chat Editor</button>
+      <button class="sidebar-btn" onclick="switchTab('fields')" id="tab-fields"><span class="icon">≡</span> Direct Edit</button>
+      <div class="sidebar-section" style="margin-top:1.5rem;">Video BG</div>
+      <div class="admin-video-opts">
+        <div class="video-label">Choose Hero Video</div>
+        <button class="vopt vactive" onclick="setVideo('city');setVActive(this)"><span class="vdot"></span> City Lights</button>
+        <button class="vopt" onclick="setVideo('studio');setVActive(this)"><span class="vdot"></span> Music Studio</button>
+        <button class="vopt" onclick="setVideo('abstract');setVActive(this)"><span class="vdot"></span> Abstract Dark</button>
+        <button class="vopt" onclick="setVideo('seoul');setVActive(this)"><span class="vdot"></span> Seoul Night</button>
+        <button class="vopt" onclick="setVideo('aurora');setVActive(this)"><span class="vdot"></span> Aurora</button>
+      </div>
+    </div>
+    <!-- Main -->
+    <div class="admin-main">
+      <div class="admin-topbar">
+        <div class="admin-section-title" id="adminSectionTitle">AI Chat Editor</div>
+        <button class="admin-close" onclick="closeAdmin()">✕ Close</button>
+      </div>
+
+      <!-- CHAT TAB -->
+      <div id="chatTab" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
+        <div class="quick-prompts">
+          <button class="qp" onclick="quickPrompt(this)">Change hero tagline</button>
+          <button class="qp" onclick="quickPrompt(this)">Update contact email</button>
+          <button class="qp" onclick="quickPrompt(this)">Edit artist bio</button>
+          <button class="qp" onclick="quickPrompt(this)">Rewrite about section</button>
+          <button class="qp" onclick="quickPrompt(this)">Change artist name</button>
+        </div>
+        <div class="chat-area" id="chatArea">
+          <div class="msg ai">
+            <div class="msg-avatar">AI</div>
+            <div class="msg-bubble">
+              Welcome to the <strong>RÊVE MUSIC AI Editor</strong>. Just tell me what you'd like to change on your site and I'll update it live.<br><br>
+              Examples:<br>
+              · <em>"Change the hero tagline to 'Dreams made real'"</em><br>
+              · <em>"Update the contact email to hello@revemusic.com"</em><br>
+              · <em>"Add a new artist named ARIA with role 'vocalist'"</em><br>
+              · <em>"Rewrite the about section to focus on Toronto roots"</em>
+            </div>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <textarea class="chat-input" id="chatInput" placeholder="Tell me what to change on your site..." onkeydown="handleKey(event)"></textarea>
+          <button class="chat-send" onclick="sendMessage()">Send →</button>
+        </div>
+      </div>
+
+      <!-- FIELDS TAB -->
+      <div id="fieldsTab" style="display:none;flex:1;overflow:auto;">
+        <div class="preview-area">
+          <div class="section-divider">Hero Section</div>
+          <div class="field-row">
+            <div class="field-group"><div class="field-label">Eyebrow Text</div><input class="field-input" id="f-heroEyebrow" value="Toronto · Seoul · Global"></div>
+            <div class="field-group"><div class="field-label">Subtitle</div><input class="field-input" id="f-heroSubtitle" value="Where vision becomes sound"></div>
+          </div>
+          <div class="field-group"><div class="field-label">Tagline</div><input class="field-input" id="f-heroTagline" value="Artist Management &amp; Music Group"></div>
+
+          <div class="section-divider" style="margin-top:2rem;">Artist</div>
+          <div class="field-row">
+            <div class="field-group"><div class="field-label">Artist Name</div><input class="field-input" id="f-artistName" value="NIIVA"></div>
+            <div class="field-group"><div class="field-label">Artist Role</div><input class="field-input" id="f-artistRole" value="Singer · Songwriter · Performer"></div>
+          </div>
+          <div class="field-group"><div class="field-label">Artist Bio</div><textarea class="field-input field-textarea" id="f-artistDesc">A singular voice bridging Canadian artistry with the global Korean pop landscape. Co-writer of aespa's record-breaking debut — an artist redefining cross-cultural pop.</textarea></div>
+
+          <div class="section-divider" style="margin-top:2rem;">About</div>
+          <div class="field-group"><div class="field-label">Pull Quote</div><input class="field-input" id="f-aboutQuote" value="Music without borders — built on relationships that last decades."></div>
+          <div class="field-group"><div class="field-label">About Paragraph 1</div><textarea class="field-input field-textarea" id="f-aboutBody1">RÊVE MUSIC GROUP was founded on a simple belief: extraordinary artists deserve extraordinary support. From Toronto to Seoul, we have spent years building genuine relationships across two of the world's most dynamic music industries.</textarea></div>
+
+          <div class="section-divider" style="margin-top:2rem;">Contact</div>
+          <div class="field-group"><div class="field-label">Email Address</div><input class="field-input" id="f-contactEmail" value="info@revemusic.com"></div>
+          <div class="field-group"><div class="field-label">Contact Subtitle</div><textarea class="field-input field-textarea" id="f-contactSub">Whether you're an artist looking for representation, a label seeking collaboration, or a brand exploring music partnerships — we'd love to hear from you.</textarea></div>
+
+          <button class="apply-btn" onclick="applyAllFields()">Apply All Changes →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===================== VIDEO BACKGROUNDS =====================
+const videos = {
+  city:     'https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_30fps.mp4',
+  studio:   'https://videos.pexels.com/video-files/4812205/4812205-uhd_2560_1440_25fps.mp4',
+  abstract: 'https://videos.pexels.com/video-files/3163534/3163534-uhd_2560_1440_25fps.mp4',
+  seoul:    'https://videos.pexels.com/video-files/4809407/4809407-uhd_2560_1440_25fps.mp4',
+  aurora:   'https://videos.pexels.com/video-files/6985023/6985023-uhd_2560_1440_25fps.mp4',
+};
+let currentVideo = 'city';
+
+function setVideo(key) {
+  currentVideo = key;
+  const wrap = document.getElementById('heroVideoWrap');
+  wrap.innerHTML = `<video autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;opacity:.35;">
+    <source src="${videos[key]}" type="video/mp4">
+  </video>`;
+  // Update picker on hero
+  document.querySelectorAll('.video-opt').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.video-opt').forEach(b => { if(b.textContent.toLowerCase().includes(key) || (key==='city'&&b.textContent.includes('City'))||(key==='studio'&&b.textContent.includes('Studio'))||(key==='abstract'&&b.textContent.includes('Abstract'))||(key==='seoul'&&b.textContent.includes('Seoul'))||(key==='aurora'&&b.textContent.includes('Aurora'))) b.classList.add('active'); });
+}
+function setVActive(el) {
+  document.querySelectorAll('.vopt').forEach(b=>b.classList.remove('vactive'));
+  el.classList.add('vactive');
+}
+
+// Init video
+setVideo('city');
+
+// ===================== CURSOR =====================
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function animCursor(){
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+document.querySelectorAll('a,button,.video-opt,.vopt,.qp').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cursor.style.transform='translate(-50%,-50%) scale(2.5)'; cursor.style.background='transparent'; cursor.style.border='1px solid var(--gold)'; });
+  el.addEventListener('mouseleave',()=>{ cursor.style.transform='translate(-50%,-50%) scale(1)'; cursor.style.background='var(--gold)'; cursor.style.border='none'; });
+});
+
+// ===================== ADMIN =====================
+function openAdmin() { document.getElementById('admin-overlay').classList.add('open'); }
+function closeAdmin() { document.getElementById('admin-overlay').classList.remove('open'); }
+function switchTab(tab) {
+  document.getElementById('chatTab').style.display = tab==='chat' ? 'flex' : 'none';
+  document.getElementById('fieldsTab').style.display = tab==='fields' ? 'block' : 'none';
+  document.getElementById('adminSectionTitle').textContent = tab==='chat' ? 'AI Chat Editor' : 'Direct Edit';
+  document.getElementById('tab-chat').classList.toggle('active', tab==='chat');
+  document.getElementById('tab-fields').classList.toggle('active', tab==='fields');
+}
+
+// ===================== TOAST =====================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+// ===================== DIRECT FIELDS =====================
+function applyAllFields() {
+  const map = {
+    'f-heroEyebrow': 'heroEyebrow', 'f-heroSubtitle': 'heroSubtitle', 'f-heroTagline': 'heroTagline',
+    'f-artistName': 'artistName', 'f-artistRole': 'artistRole', 'f-artistDesc': 'artistDesc',
+    'f-aboutQuote': 'aboutQuote', 'f-aboutBody1': 'aboutBody1', 'f-contactSub': 'contactSub',
+  };
+  for(const [fid, sid] of Object.entries(map)) {
+    const el = document.getElementById(sid);
+    const val = document.getElementById(fid).value;
+    if(el) el.textContent = val;
+  }
+  // Email
+  const em = document.getElementById('f-contactEmail').value;
+  const emEl = document.getElementById('contactEmail');
+  emEl.textContent = em; emEl.href = 'mailto:'+em;
+  // Artist monogram
+  const an = document.getElementById('f-artistName').value;
+  document.getElementById('artistMonogram').textContent = an.charAt(0);
+  showToast('Changes applied ✓');
+}
+
+// ===================== AI CHAT =====================
+function quickPrompt(btn) {
+  document.getElementById('chatInput').value = btn.textContent + ': ';
+  document.getElementById('chatInput').focus();
+}
+function handleKey(e) { if(e.key==='Enter'&&!e.shiftKey){ e.preventDefault(); sendMessage(); } }
+
+function addMsg(role, html) {
+  const area = document.getElementById('chatArea');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.innerHTML = `<div class="msg-avatar">${role==='ai'?'AI':'You'}</div><div class="msg-bubble">${html}</div>`;
+  area.appendChild(div);
+  area.scrollTop = area.scrollHeight;
+  return div;
+}
+
+function addTyping() {
+  const area = document.getElementById('chatArea');
+  const div = document.createElement('div');
+  div.className = 'msg ai'; div.id = 'typing-msg';
+  div.innerHTML = `<div class="msg-avatar">AI</div><div class="msg-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  area.appendChild(div); area.scrollTop = area.scrollHeight;
+}
+function removeTyping() { const t = document.getElementById('typing-msg'); if(t) t.remove(); }
+
+// Site content state
+const siteContent = {
+  heroEyebrow: 'Toronto · Seoul · Global',
+  heroSubtitle: 'Where vision becomes sound',
+  heroTagline: 'Artist Management & Music Group',
+  artistName: 'NIIVA',
+  artistRole: 'Singer · Songwriter · Performer',
+  artistDesc: "A singular voice bridging Canadian artistry with the global Korean pop landscape. Co-writer of aespa's record-breaking debut — an artist redefining cross-cultural pop.",
+  aboutQuote: 'Music without borders — built on relationships that last decades.',
+  aboutBody1: 'RÊVE MUSIC GROUP was founded on a simple belief: extraordinary artists deserve extraordinary support. From Toronto to Seoul, we have spent years building genuine relationships across two of the world\'s most dynamic music industries.',
+  aboutBody2: 'Distributed through The Orchard and operating under the MIND VISION holding company, RÊVE MUSIC is built for the modern music landscape — where borders are obstacles to be dissolved, not walls to hide behind.',
+  contactEmail: 'info@revemusic.com',
+  contactSub: 'Whether you\'re an artist looking for representation, a label seeking collaboration, or a brand exploring music partnerships — we\'d love to hear from you.',
+  footerLine: '© 2026 RÊVE MUSIC GROUP · MIND VISION LLC · All rights reserved',
+};
+
+function applyChanges(changes) {
+  for(const [key, val] of Object.entries(changes)) {
+    siteContent[key] = val;
+    const el = document.getElementById(key);
+    if(el) {
+      if(key === 'contactEmail') { el.textContent = val; el.href = 'mailto:'+val; }
+      else el.textContent = val;
+    }
+    if(key === 'artistName') { document.getElementById('artistMonogram').textContent = val.charAt(0); }
+    // Sync fields tab
+    const fEl = document.getElementById('f-'+key);
+    if(fEl) fEl.value = val;
+  }
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text) return;
+  input.value = '';
+
+  addMsg('user', text);
+  addTyping();
+
+  const systemPrompt = `You are an AI CMS editor for the RÊVE MUSIC GROUP website. Your job is to interpret the user's natural language instructions and make precise changes to the site content.
+
+Current site content:
+${JSON.stringify(siteContent, null, 2)}
+
+Available content fields you can edit:
+- heroEyebrow (small text above title, e.g. "Toronto · Seoul · Global")
+- heroSubtitle (italic subtitle below title)
+- heroTagline (small uppercase text)
+- artistName (featured artist name)
+- artistRole (artist role/description line)
+- artistDesc (artist biography paragraph)
+- aboutQuote (the pull quote in about section)
+- aboutBody1 (first about paragraph)
+- aboutBody2 (second about paragraph)
+- contactEmail (contact email address)
+- contactSub (contact section subtitle text)
+- footerLine (footer copyright text)
+
+Video backgrounds available: city, studio, abstract, seoul, aurora
+
+Respond ONLY with a JSON object in this exact format:
+{
+  "message": "A brief, friendly confirmation of what you changed (plain text, no markdown)",
+  "changes": { "fieldName": "new value", ... },
+  "videoChange": null or one of: "city", "studio", "abstract", "seoul", "aurora",
+  "changedFields": ["fieldName", ...]
+}
+
+If the user asks to change the video, set videoChange to the appropriate option and leave changes empty.
+If nothing matches, set changes to {} and explain in message.
+ONLY return raw JSON, no markdown fences.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: text }]
+      })
+    });
+    const data = await res.json();
+    removeTyping();
+
+    let raw = data.content?.find(b=>b.type==='text')?.text || '{}';
+    raw = raw.replace(/```json|```/g,'').trim();
+    const parsed = JSON.parse(raw);
+
+    // Apply changes
+    if(parsed.changes && Object.keys(parsed.changes).length > 0) {
+      applyChanges(parsed.changes);
+    }
+    if(parsed.videoChange) {
+      setVideo(parsed.videoChange);
+      document.querySelectorAll('.vopt').forEach(b=>{
+        if(b.textContent.toLowerCase().includes(parsed.videoChange.toLowerCase()) ||
+           (parsed.videoChange==='city'&&b.textContent.includes('City'))||
+           (parsed.videoChange==='studio'&&b.textContent.includes('Studio'))||
+           (parsed.videoChange==='abstract'&&b.textContent.includes('Abstract'))||
+           (parsed.videoChange==='seoul'&&b.textContent.includes('Seoul'))||
+           (parsed.videoChange==='aurora'&&b.textContent.includes('Aurora'))) {
+          document.querySelectorAll('.vopt').forEach(x=>x.classList.remove('vactive'));
+          b.classList.add('vactive');
+        }
+      });
+    }
+
+    // Build reply
+    let replyHtml = parsed.message || 'Done!';
+    if(parsed.changedFields && parsed.changedFields.length > 0) {
+      replyHtml += '<br><br>' + parsed.changedFields.map(f=>`<span class="change-tag">${f}</span>`).join(' ');
+    }
+    addMsg('ai', replyHtml);
+    if(parsed.changes && Object.keys(parsed.changes).length > 0) showToast('Site updated ✓');
+
+  } catch(err) {
+    removeTyping();
+    addMsg('ai', 'Something went wrong connecting to the AI. Please try again.');
+    console.error(err);
+  }
+}
+
+// Scroll-triggered fades
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }});
+}, {threshold:.1});
+document.querySelectorAll('.service-item,.artist-name,.about-quote').forEach(el=>{
+  el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity .8s ease, transform .8s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
