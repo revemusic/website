@@ -286,34 +286,36 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
     </div>
     <div class="contact-panel active" id="panel-music">
       <div class="contact-form-inner">
-        <div class="form-section">
+        <form class="form-section" action="https://formspree.io/f/mwvrqnll" method="POST">
+          <input type="hidden" name="_subject" value="New Music Submission - REVE MUSIC">
           <div class="form-row">
-            <div class="form-field"><label class="form-label">Artist / Project Name</label><input class="form-input" type="text" placeholder="Your artist or project name"></div>
-            <div class="form-field"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="First and Last Name"></div>
+            <div class="form-field"><label class="form-label">Artist / Project Name</label><input class="form-input" type="text" name="artist" placeholder="Your artist or project name"></div>
+            <div class="form-field"><label class="form-label">Your Name</label><input class="form-input" type="text" name="name" placeholder="First and Last Name"></div>
           </div>
           <div class="form-row">
-            <div class="form-field"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="your@email.com"></div>
-            <div class="form-field"><label class="form-label">Genre</label><input class="form-input" type="text" placeholder="e.g. Pop, R&amp;B, Alt-Pop"></div>
+            <div class="form-field"><label class="form-label">Email</label><input class="form-input" type="email" name="email" placeholder="your@email.com"></div>
+            <div class="form-field"><label class="form-label">Genre</label><input class="form-input" type="text" name="genre" placeholder="e.g. Pop, R&amp;B, Alt-Pop"></div>
           </div>
-          <div class="form-field"><label class="form-label">Music Link</label><input class="form-input" type="url" placeholder="Spotify, SoundCloud, YouTube, EPK..."></div>
-          <div class="form-field"><label class="form-label">Social Media</label><input class="form-input" type="text" placeholder="Instagram, TikTok - where can we find you?"></div>
-          <div class="form-field"><label class="form-label">Tell Us About Your Music</label><textarea class="form-input" placeholder="Where you are in your career, what you're working on, what makes your music stand out..."></textarea></div>
-          <div class="form-field"><label class="form-label">What Are You Looking For?</label><textarea class="form-input" placeholder="Management, label services, A&amp;R, distribution, consultation - let us know what kind of support you're looking for and what you're hoping to achieve..."></textarea></div>
-          <button class="form-submit" onclick="handleSubmit(event)">Submit</button>
-        </div>
+          <div class="form-field"><label class="form-label">Music Link</label><input class="form-input" type="url" name="music_link" placeholder="Spotify, SoundCloud, YouTube, EPK..."></div>
+          <div class="form-field"><label class="form-label">Social Media</label><input class="form-input" type="text" name="social_media" placeholder="Instagram, TikTok - where can we find you?"></div>
+          <div class="form-field"><label class="form-label">Tell Us About Your Music</label><textarea class="form-input" name="about_music" placeholder="Where you are in your career, what you're working on, what makes your music stand out..."></textarea></div>
+          <div class="form-field"><label class="form-label">What Are You Looking For?</label><textarea class="form-input" name="looking_for" placeholder="Management, label services, A&amp;R, distribution, consultation - let us know what kind of support you're looking for and what you're hoping to achieve..."></textarea></div>
+          <button class="form-submit" type="submit">Submit</button>
+        </form>
       </div>
     </div>
     <div class="contact-panel" id="panel-message">
       <div class="contact-form-inner">
-        <div class="form-section">
+        <form class="form-section" action="https://formspree.io/f/mwvrqnll" method="POST">
+          <input type="hidden" name="_subject" value="New Message - REVE MUSIC">
           <div class="form-row">
-            <div class="form-field"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="First and Last Name"></div>
-            <div class="form-field"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="your@email.com"></div>
+            <div class="form-field"><label class="form-label">Your Name</label><input class="form-input" type="text" name="name" placeholder="First and Last Name"></div>
+            <div class="form-field"><label class="form-label">Email</label><input class="form-input" type="email" name="email" placeholder="your@email.com"></div>
           </div>
-          <div class="form-field"><label class="form-label">Subject</label><input class="form-input" type="text" placeholder="What's this regarding?"></div>
-          <div class="form-field"><label class="form-label">Message</label><textarea class="form-input" style="min-height:140px;" placeholder="Write your message here..."></textarea></div>
-          <button class="form-submit" onclick="handleSubmit(event)">Send Message</button>
-        </div>
+          <div class="form-field"><label class="form-label">Subject</label><input class="form-input" type="text" name="subject" placeholder="What's this regarding?"></div>
+          <div class="form-field"><label class="form-label">Message</label><textarea class="form-input" name="message" style="min-height:140px;" placeholder="Write your message here..."></textarea></div>
+          <button class="form-submit" type="submit">Send Message</button>
+        </form>
       </div>
     </div>
     <div class="contact-direct reveal">
