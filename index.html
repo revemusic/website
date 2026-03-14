@@ -44,9 +44,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.1rem 5vw;display:f
 .hero-scroll{position:absolute;bottom:2.2rem;left:5vw;display:flex;align-items:center;gap:.9rem;opacity:0;animation:fadeUp .8s 1.05s forwards;z-index:2;}
 .hero-scroll span{font-family:var(--font-body);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
 .scroll-bar{width:32px;height:1px;background:var(--accent);}
-.video-picker{position:absolute;bottom:2.2rem;right:5vw;display:flex;gap:.35rem;z-index:2;}
-.vpick{font-family:var(--font-body);font-size:.58rem;letter-spacing:.1em;color:var(--muted);background:rgba(255,255,255,.85);border:1px solid var(--mid-gray);padding:.28rem .6rem;cursor:pointer;transition:all .22s;}
-.vpick:hover,.vpick.active{border-color:var(--accent);color:var(--accent);}
+
 .section-wrap{padding:6.5rem 5vw;}
 .section-label{font-family:var(--font-body);font-size:.65rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;display:flex;align-items:center;gap:.75rem;}.contact-inner .section-label{font-size:clamp(2.4rem,5vw,3.8rem);letter-spacing:-.01em;font-family:var(--font-serif);font-weight:400;font-style:italic;color:var(--navy);text-transform:none;line-height:1;}.contact-inner .section-label::before{display:none;}
 .section-label::before{content:'';width:20px;height:1.5px;background:var(--accent);}
@@ -58,7 +56,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.1rem 5vw;display:f
 .artists-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--mid-gray);}
 .artist-card{background:var(--white);padding:2.5rem;position:relative;overflow:hidden;cursor:pointer;transition:background .3s;}
 .artist-card:hover{background:var(--accent-pale);}
-.artist-photo-wrap{width:100%;aspect-ratio:4/5;overflow:hidden;background:var(--light-gray);margin-bottom:1.8rem;}
+.artist-photo-wrap{width:55%;aspect-ratio:3/4;overflow:hidden;background:var(--light-gray);margin-bottom:1.8rem;}
 .artist-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .55s ease;}
 .artist-card:hover .artist-photo-wrap img{transform:scale(1.04);}
 .artist-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.35rem;}
@@ -164,7 +162,6 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
 </nav>
 
 <section id="hero">
-  <div class="hero-video-wrap" id="heroVideoWrap"></div>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
     <div class="hero-logo-wrap"><img src="https://raw.githubusercontent.com/revemusic/website/main/logo.png" alt="RÊVE MUSIC"></div>
@@ -174,11 +171,6 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
     </p>
   </div>
   <div class="hero-scroll"><div class="scroll-bar"></div><span>Scroll</span></div>
-  <div class="video-picker">
-    <button class="vpick active" onclick="setVideo('city',this)">City</button>
-    <button class="vpick" onclick="setVideo('abstract',this)">Abstract</button>
-    <button class="vpick" onclick="setVideo('aurora',this)">Aurora</button>
-  </div>
 </section>
 
 <section id="artists" class="section-wrap">
@@ -348,7 +340,7 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
     <div class="contact-direct reveal">
       <div>
         <div class="contact-direct-label">Direct Contact</div>
-        <a href="/cdn-cgi/l/email-protection#0f666169604f7d6a796a627a7c666c216c6062" class="contact-email-link" id="contactEmail"><span class="__cf_email__" data-cfemail="ee87808881ae9c8b988b839b9d878dc08d8183">[email&#160;protected]</span></a>
+        <a href="mailto:info&#64;revemusic&#46;com" class="contact-email-link" id="contactEmail">info&#64;revemusic&#46;com</a>
       </div>
       <div class="social-row">
         <a href="https://www.instagram.com/revemusicgroup/" target="_blank" class="social-pill">Instagram</a>
@@ -371,29 +363,7 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
 </footer>
 
 <script>
-var vids = {
-  city: 'https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_30fps.mp4',
-  studio: 'https://videos.pexels.com/video-files/4812205/4812205-uhd_2560_1440_25fps.mp4',
-  abstract: 'https://videos.pexels.com/video-files/3163534/3163534-uhd_2560_1440_25fps.mp4',
-  seoul: 'https://videos.pexels.com/video-files/4809407/4809407-uhd_2560_1440_25fps.mp4',
-  aurora: 'https://videos.pexels.com/video-files/6985023/6985023-uhd_2560_1440_25fps.mp4'
-};
 
-function setVideo(k, btn) {
-  var wrap = document.getElementById('heroVideoWrap');
-  wrap.innerHTML = '<video autoplay muted loop playsinline><source src="' + vids[k] + '" type="video/mp4"></video>';
-  if (btn) {
-    document.querySelectorAll('.vpick').forEach(function(b) { b.classList.remove('active'); });
-    btn.classList.add('active');
-  }
-}
-
-function setVA(el) {
-  document.querySelectorAll('.vopt').forEach(function(b) { b.classList.remove('vactive'); });
-  el.classList.add('vactive');
-}
-
-setVideo('city', null);
 
 var cur = document.getElementById('cursor');
 var ring = document.getElementById('cursorRing');
@@ -521,5 +491,8 @@ async function sendMsg() {
 }
 
 </script>
+</body>
+</html>
+
 </body>
 </html>
