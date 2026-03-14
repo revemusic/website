@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REVE MUSIC - Developing Artists for the Global Stage</title>
+<title>RÊVE MUSIC - Developing Artists for the Global Stage</title>
 <meta name="description" content="Toronto-based artist management and development company focused on building artists with international potential.">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
@@ -23,7 +23,7 @@ body{background:var(--white);color:var(--navy);font-family:var(--font-body);over
 nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.1rem 5vw;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--light-gray);}
 .nav-logo img{height:30px;width:auto;display:block;}
 .nav-links{display:flex;gap:2.4rem;list-style:none;}
-.nav-links a{font-family:var(--font-body);font-size:.78rem;font-weight:400;letter-spacing:.04em;color:var(--muted);text-decoration:none;transition:color .25s;}
+.nav-links a{font-family:var(--font-body);font-size:.85rem;font-weight:500;letter-spacing:.04em;color:var(--navy-soft);text-decoration:none;transition:color .25s;}
 .nav-links a:hover{color:var(--accent);}
 .nav-right{display:flex;align-items:center;gap:.65rem;}
 .nav-cta{font-family:var(--font-body);font-size:.73rem;font-weight:500;letter-spacing:.07em;color:var(--white);background:var(--navy);border:none;padding:.62rem 1.35rem;cursor:pointer;text-decoration:none;display:inline-block;transition:background .25s;}
@@ -36,9 +36,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.1rem 5vw;display:f
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.97) 0%,rgba(248,249,252,.94) 55%,rgba(232,237,248,.9) 100%);}
 .hero-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 5vw;}
 .hero-logo-wrap{margin-bottom:2.2rem;opacity:0;animation:fadeUp .9s .2s forwards;}
-.hero-logo-wrap img{height:clamp(80px,12vw,148px);width:auto;display:block;}
+.hero-logo-wrap img{height:clamp(120px,18vw,210px);width:auto;display:block;}
 .hero-slogan{font-family:var(--font-serif);font-size:clamp(1rem,2vw,1.5rem);font-style:italic;color:var(--navy-soft);margin-bottom:1.4rem;line-height:1.5;opacity:0;animation:fadeUp .9s .45s forwards;}
-.hero-cities{font-family:var(--font-body);font-size:.7rem;font-weight:300;letter-spacing:.16em;color:var(--muted);opacity:0;animation:fadeUp .9s .62s forwards;}
+.hero-cities{font-family:var(--font-body);font-size:.7rem;font-weight:400;letter-spacing:.16em;color:var(--navy-soft);opacity:0;animation:fadeUp .9s .62s forwards;}
 .hero-cities span{display:inline-block;margin:0 .3rem;}
 .hero-cities span:not(:last-child)::after{content:'·';margin-left:.6rem;color:var(--accent-light);}
 .hero-scroll{position:absolute;bottom:2.2rem;left:5vw;display:flex;align-items:center;gap:.9rem;opacity:0;animation:fadeUp .8s 1.05s forwards;z-index:2;}
@@ -48,7 +48,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.1rem 5vw;display:f
 .vpick{font-family:var(--font-body);font-size:.58rem;letter-spacing:.1em;color:var(--muted);background:rgba(255,255,255,.85);border:1px solid var(--mid-gray);padding:.28rem .6rem;cursor:pointer;transition:all .22s;}
 .vpick:hover,.vpick.active{border-color:var(--accent);color:var(--accent);}
 .section-wrap{padding:6.5rem 5vw;}
-.section-label{font-family:var(--font-body);font-size:.65rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;display:flex;align-items:center;gap:.75rem;}
+.section-label{font-family:var(--font-body);font-size:.65rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;display:flex;align-items:center;gap:.75rem;}.contact-inner .section-label{font-size:clamp(2.4rem,5vw,3.8rem);letter-spacing:-.01em;font-family:var(--font-serif);font-weight:400;font-style:italic;color:var(--navy);text-transform:none;line-height:1;}.contact-inner .section-label::before{display:none;}
 .section-label::before{content:'';width:20px;height:1.5px;background:var(--accent);}
 .section-heading{font-family:var(--font-display);font-size:clamp(1.9rem,3.6vw,3rem);font-weight:500;line-height:1.15;color:var(--navy);margin-bottom:1.4rem;}
 .section-heading em{font-style:italic;color:var(--accent);font-weight:400;}
@@ -128,7 +128,7 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
 
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);border:1px solid rgba(38,83,163,.38);color:rgba(255,255,255,.75);font-family:var(--font-body);font-size:.63rem;letter-spacing:.13em;text-transform:uppercase;padding:.65rem 1.35rem;z-index:2000;transition:transform .4s cubic-bezier(.16,1,.3,1);pointer-events:none;}
 .toast.show{transform:translateX(-50%) translateY(0);}
-.divider{height:1px;background:var(--light-gray);margin:0 5vw;}
+.divider{height:1px;background:var(--light-gray);margin:0 5vw;}.name-cell{background:var(--white);padding:1rem 1.3rem;font-family:var(--font-display);font-size:.9rem;font-weight:400;color:var(--navy-soft);transition:background .2s,color .2s;cursor:default;}.name-cell:hover{background:var(--accent-pale);color:var(--accent);}
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
@@ -151,7 +151,7 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
 <div class="toast" id="toast"></div>
 
 <nav>
-  <a href="#hero" class="nav-logo"><img src="https://raw.githubusercontent.com/revemusic/website/main/logo.png" alt="REVE MUSIC"></a>
+  <a href="#hero" class="nav-logo"><img src="https://raw.githubusercontent.com/revemusic/website/main/logo.png" alt="RÊVE MUSIC"></a>
   <ul class="nav-links">
     <li><a href="#artists">Artists</a></li>
     <li><a href="#services">Services</a></li>
@@ -167,7 +167,7 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
   <div class="hero-video-wrap" id="heroVideoWrap"></div>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
-    <div class="hero-logo-wrap"><img src="https://raw.githubusercontent.com/revemusic/website/main/logo.png" alt="REVE MUSIC"></div>
+    <div class="hero-logo-wrap"><img src="https://raw.githubusercontent.com/revemusic/website/main/logo.png" alt="RÊVE MUSIC"></div>
     <p class="hero-slogan" id="heroSlogan">Developing Artists for the Global Stage</p>
     <p class="hero-cities">
       <span>Toronto</span><span>New York</span><span>Nashville</span><span>Vancouver</span><span>Los Angeles</span><span>London</span><span>Seoul</span>
@@ -184,10 +184,9 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
 <section id="artists" class="section-wrap">
   <div class="artists-intro reveal">
     <div>
-      <div class="section-label">Our Artists</div>
-      <h2 class="section-heading">Artists on<br><em>REVE</em></h2>
+      <h2 class="section-heading">Artists on <em>RÊVE</em></h2>
     </div>
-    <p class="section-sub">REVE MUSIC works with artists from the early stages of development through global releases, combining creative direction with long-term career strategy.</p>
+    <p class="section-sub">Artist management and development for emerging talents, ensuring they reach their fullest potential and achieve excellence on their own terms.</p>
   </div>
   <div class="artists-grid">
     <div class="artist-card reveal">
@@ -225,6 +224,35 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
   </div>
 </section>
 
+<div class="divider"></div>
+
+<section id="worked-with" class="section-wrap">
+  <div class="reveal" style="margin-bottom:3rem;">
+    <div class="section-label">Past Collaborations</div>
+    <h2 class="section-heading">Artists We've<br><em>Worked With</em></h2>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--light-gray);" class="reveal">
+    <div class="name-cell">Adaline</div>
+    <div class="name-cell">Alexia Lynn</div>
+    <div class="name-cell">December Rose</div>
+    <div class="name-cell">earthe2zoe</div>
+    <div class="name-cell">Encore</div>
+    <div class="name-cell">FAVVKES</div>
+    <div class="name-cell">Gracie</div>
+    <div class="name-cell">KAZMO</div>
+    <div class="name-cell">Kenadi Dodds</div>
+    <div class="name-cell">Maddisun</div>
+    <div class="name-cell">Martina Ortiz Luis</div>
+    <div class="name-cell">Max Parker</div>
+    <div class="name-cell">Maze</div>
+    <div class="name-cell">New Moon Junction</div>
+    <div class="name-cell">Nix Correa</div>
+    <div class="name-cell">Panicland</div>
+    <div class="name-cell">Runaway Angel</div>
+    <div class="name-cell">Shae Dupuy</div>
+  </div>
+</section>
+
 <section id="services" class="section-wrap">
   <div class="services-intro reveal">
     <div>
@@ -238,7 +266,7 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
     <div class="service-card reveal"><div class="service-num">02</div><div class="service-name">A&amp;R + Artist Development</div><p class="service-desc">Nurturing emerging talent through songwriter camps, co-writing sessions, and creative development in partnership with SOCAN.</p></div>
     <div class="service-card reveal"><div class="service-num">03</div><div class="service-name">Project Management + Consultation</div><p class="service-desc">Strategic consultation and hands-on project management from release campaigns to international initiatives and industry partnerships.</p></div>
     <div class="service-card reveal"><div class="service-num">04</div><div class="service-name">Music Business + Deal Negotiation</div><p class="service-desc">Contract review, deal structuring, and negotiation across recording, publishing, licensing, sync, and brand partnerships.</p></div>
-    <div class="service-card reveal"><div class="service-num">05</div><div class="service-name">Label Services + Distribution</div><p class="service-desc">Distributed through The Orchard, REVE MUSIC delivers global music distribution, release strategy, and full label services.</p></div>
+    <div class="service-card reveal"><div class="service-num">05</div><div class="service-name">Label Services + Distribution</div><p class="service-desc">Distributed through The Orchard, RÊVE MUSIC delivers global music distribution, release strategy, and full label services.</p></div>
     <div class="service-card reveal"><div class="service-num">06</div><div class="service-name">Digital + Streaming Strategy</div><p class="service-desc">DSP pitching, playlist strategy, release optimization, and data-driven decision-making across all streaming platforms.</p></div>
     <div class="service-card reveal"><div class="service-num">07</div><div class="service-name">Publishing Strategy + Songwriter Development</div><p class="service-desc">Building publishing income through sync opportunities, co-writing initiatives, and strategic placement with music supervisors globally.</p></div>
     <div class="service-card reveal"><div class="service-num">08</div><div class="service-name">Marketing + Promotion</div><p class="service-desc">Campaign strategy, media relations, radio promotion, and coordinated release campaigns that build awareness and generate real momentum.</p></div>
@@ -249,24 +277,24 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
 
 <section id="about" class="section-wrap" style="background:var(--off-white);">
   <div class="section-label reveal">Our Story</div>
-  <h2 class="section-heading reveal">About <em>REVE MUSIC</em></h2>
+  <h2 class="section-heading reveal">About <em>RÊVE MUSIC</em></h2>
   <div class="about-grid">
     <div class="reveal">
       <div class="about-story">
-        <p>REVE MUSIC is a Toronto-based artist management and development company focused on building artists with international potential. The company works closely with talent from the early stages of development through global releases, combining creative direction with long-term career strategy.</p>
-        <p>Founded by music industry veteran Tommy K.W. Lam, REVE MUSIC helps artists navigate today's evolving music business through strategic partnerships, digital growth, and international market expansion. The company's artists have achieved Billboard chart success, millions of global streams, major publishing deals, and international songwriting placements.</p>
-        <p>REVE MUSIC continues to focus on developing distinctive artists and connecting them with opportunities across North America, the UK, Europe, and Asia.</p>
+        <p>RÊVE MUSIC is a Toronto-based artist management and development company focused on building artists with international potential. The company works closely with talent from the early stages of development through global releases, combining creative direction with long-term career strategy.</p>
+        <p>Founded by music industry veteran Tommy K.W. Lam, RÊVE MUSIC helps artists navigate today's evolving music business through strategic partnerships, digital growth, and international market expansion. The company's artists have achieved Billboard chart success, millions of global streams, major publishing deals, and international songwriting placements.</p>
+        <p>RÊVE MUSIC continues to focus on developing distinctive artists and connecting them with opportunities across North America, the UK, Europe, and Asia.</p>
       </div>
       <div class="drives-us">
         <h3 class="drives-us-heading">What <em>Drives Us</em></h3>
-        <p>REVE MUSIC is built on the idea that strong artist development leads to lasting success. By combining creative guidance with strategic industry relationships, we help artists move beyond local scenes and onto the global stage.</p>
+        <p>RÊVE MUSIC is built on the idea that strong artist development leads to lasting success. By combining creative guidance with strategic industry relationships, we help artists move beyond local scenes and onto the global stage.</p>
       </div>
     </div>
     <div class="reveal">
       <div class="tommy-name">Tommy K.W. Lam</div>
       <div class="tommy-title">Founder and Artist Manager</div>
       <div class="tommy-bio">
-        <p>Tommy K.W. Lam is a Toronto-based artist manager and founder of REVE MUSIC with nearly three decades of experience in the music industry. He began his career as a rock drummer before moving into production, digital media, and artist management. Over the years he has built a reputation for developing artists with global potential and guiding them from early stages to international success.</p>
+        <p>Tommy K.W. Lam is a Toronto-based artist manager and founder of RÊVE MUSIC with nearly three decades of experience in the music industry. He began his career as a rock drummer before moving into production, digital media, and artist management. Over the years he has built a reputation for developing artists with global potential and guiding them from early stages to international success.</p>
         <p>Tommy has played a key role in the rise of artists like NIIVA, whose work has earned multiple Billboard No. 1 chart achievements, millions of streams worldwide, and a SOCAN No. 1 Song Award for co-writing the K-pop hit Black Mamba by aespa. Earlier in his career, he co-founded Digital Groove and EXI Radio, pioneering internet radio in the 1990s, and later created FANPUSH, Canada's first crowdfunding platform for artists.</p>
         <p>Today, he continues to focus on artist development, global strategy, and building long-term careers in music.</p>
       </div>
@@ -278,7 +306,6 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
   <div class="contact-inner">
     <div class="reveal">
       <div class="section-label">Get In Touch</div>
-      <h2 class="section-heading">Work With <em>Us</em></h2>
     </div>
     <div class="contact-tabs reveal">
       <button class="ctab active" onclick="switchTab('music',this)">Submit Music</button>
@@ -287,7 +314,7 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
     <div class="contact-panel active" id="panel-music">
       <div class="contact-form-inner">
         <form class="form-section" action="https://formspree.io/f/mwvrqnll" method="POST">
-          <input type="hidden" name="_subject" value="New Music Submission - REVE MUSIC">
+          <input type="hidden" name="_subject" value="New Music Submission - RÊVE MUSIC">
           <div class="form-row">
             <div class="form-field"><label class="form-label">Artist / Project Name</label><input class="form-input" type="text" name="artist" placeholder="Your artist or project name"></div>
             <div class="form-field"><label class="form-label">Your Name</label><input class="form-input" type="text" name="name" placeholder="First and Last Name"></div>
@@ -307,7 +334,7 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
     <div class="contact-panel" id="panel-message">
       <div class="contact-form-inner">
         <form class="form-section" action="https://formspree.io/f/mwvrqnll" method="POST">
-          <input type="hidden" name="_subject" value="New Message - REVE MUSIC">
+          <input type="hidden" name="_subject" value="New Message - RÊVE MUSIC">
           <div class="form-row">
             <div class="form-field"><label class="form-label">Your Name</label><input class="form-input" type="text" name="name" placeholder="First and Last Name"></div>
             <div class="form-field"><label class="form-label">Email</label><input class="form-input" type="email" name="email" placeholder="your@email.com"></div>
@@ -333,8 +360,8 @@ footer{background:var(--navy);padding:2.2rem 5vw;display:flex;justify-content:sp
 </section>
 
 <footer>
-  <div class="footer-logo"><img src="https://raw.githubusercontent.com/revemusic/website/main/logo.png" alt="REVE MUSIC"></div>
-  <div class="footer-copy">2026 REVE MUSIC GROUP - MIND VISION LLC - All rights reserved</div>
+  <div class="footer-logo"><img src="https://raw.githubusercontent.com/revemusic/website/main/logo.png" alt="RÊVE MUSIC"></div>
+  <div class="footer-copy">2026 RÊVE MUSIC GROUP - MIND VISION LLC - All rights reserved</div>
   <div class="footer-links">
     <a href="#artists">Artists</a>
     <a href="#services">Services</a>
@@ -468,7 +495,7 @@ async function sendMsg() {
   inp.value = '';
   addMsg('user', text);
   addTyping();
-  var sys = 'You are the AI editor for REVE MUSIC website. Return ONLY raw JSON, no markdown: {"message":"confirmation","changes":{"field":"value"},"videoChange":null,"changedFields":["field"]}. Editable fields: heroSlogan, contactEmail. Videos: city/studio/abstract/seoul/aurora. Current: ' + JSON.stringify(site);
+  var sys = 'You are the AI editor for RÊVE MUSIC website. Return ONLY raw JSON, no markdown: {"message":"confirmation","changes":{"field":"value"},"videoChange":null,"changedFields":["field"]}. Editable fields: heroSlogan, contactEmail. Videos: city/studio/abstract/seoul/aurora. Current: ' + JSON.stringify(site);
   try {
     var res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
