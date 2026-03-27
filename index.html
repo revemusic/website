@@ -380,6 +380,11 @@ function switchTab(name,btn){
   btn.classList.add('active');
   document.getElementById('tab-'+name).classList.add('active');
 }
-function handleSubmit(e){e.preventDefault();showToast('Submitted
+function handleSubmit(e){e.preventDefault();showToast('Submitted — we\'ll be in touch soon!');e.target.reset();}
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},3500);}
+</script>
+</body>
+</html>
+
 
                                                       
